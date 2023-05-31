@@ -1,16 +1,44 @@
 import { ToDoListItem } from "./ToDoListItem/ToDoListItem";
-import classes from './ToDoList.module.scss'
+import { ToDo } from "../../models/todo-item";
+import "./ToDoList.scss";
+
+export const ToDoList = (props: {todos: ToDo[], updateToDo: Function, deleteToDo: Function, notify: Function}) => {
 
 
-export const ToDoList = () => {
-  const {container, list, failed, compiled} = classes
+	const checkedList = () => {
+		return props.todos
+					.filter((item) => !item.isDone)
+					.map((item, idx) => {
+						return <ToDoListItem 
+							toDoItem={item} 
+							key={idx} 
+							updateToDo={props.updateToDo} 
+							deleteToDo={props.deleteToDo} 
+							notify={props.notify}
+						/>;
+					})
+	}
+	const unCheckedList = () => {
+		return props.todos
+					.filter((item) => item.isDone)
+					.map((item, idx) => {
+						return <ToDoListItem 
+							toDoItem={item} 
+							key={idx} 
+							updateToDo={props.updateToDo} 
+							deleteToDo={props.deleteToDo} 
+							notify={props.notify}
+						/>;
+					})
+	}
+
   return (
-    <div className={container}>
-      <ul className={`${list} ${failed}`}>
-        <ToDoListItem/>
+    <div className="todo-container">
+      <ul className="todo-list failed">
+        {checkedList()}
       </ul>
-      <ul className={`${list} ${compiled}`}>
-        <ToDoListItem/>
+      <ul className="todo-list completed">
+        {unCheckedList()}
       </ul>
     </div>
   );

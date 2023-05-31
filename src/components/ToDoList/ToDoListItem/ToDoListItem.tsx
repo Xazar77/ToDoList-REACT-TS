@@ -1,14 +1,29 @@
-import classes from './ToDoListItem.module.scss';
 
+import { ToDo } from '../../../models/todo-item';
 
-export const ToDoListItem = () => {
-  const {wrapper, buttons, btn, trash, check, uncheck} = classes
+import './ToDoListItem.scss'
+
+export const ToDoListItem = (props: {toDoItem: ToDo, updateToDo: Function, deleteToDo: Function, notify: Function}) => {
+ 
+  const {text, isDone} = props.toDoItem
   return (
-    <li className={wrapper}>
-      <span>Первая задача</span>
-      <div className={buttons}>
-        <button className={`${btn} ${trash}`}></button>
-        <button className={`${btn} ${check}`}></button>
+    <li className='todo-list-item__wrapper'>
+      <span>{text}</span>
+      <div className='todo-list-item__buttons'>
+        <button 
+          className='btn-trash'
+          onClick={() =>{ 
+            props.deleteToDo(props.toDoItem)
+            props.notify('Задача удалена')
+        }}
+        ></button>
+        <button 
+          className={isDone? 'btn-check': 'btn-uncheck'} 
+          onClick={() => {
+            props.updateToDo(props.toDoItem)
+            props.notify('Задача изменена')
+        }}
+        ></button>
       </div>
     </li>
   );
