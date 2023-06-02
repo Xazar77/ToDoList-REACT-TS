@@ -17,9 +17,6 @@ export const Form = (props: {createNewToDo: Function, notify: Function}) => {
       
   }
 
- 
-
-
   return (
     <div className={form}>
       <form action="#" onSubmit={() =>{
