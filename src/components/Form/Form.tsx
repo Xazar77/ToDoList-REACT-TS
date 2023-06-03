@@ -9,20 +9,23 @@ export const Form = (props: {createNewToDo: Function, notify: Function}) => {
   const[text, setText] = useState<string>('')
 
 
-  const formSubmit = () => {
+  const formSubmit = (event: React.SyntheticEvent) => {
+      event.preventDefault()
+      
       if(text){
         props.createNewToDo(text)
         setText('')
+        props.notify('Задача добавлена')
       }
       
   }
 
+
   return (
     <div className={form}>
-      <form action="#" onSubmit={() =>{
-        formSubmit()
-        props.notify('Задача добавлена')
-        }}>
+      <form action="#" onSubmit={formSubmit}>
+
+       
         <label>
           <input 
             value={text} 

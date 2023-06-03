@@ -10,7 +10,7 @@ export const ListItem = ({todo}: {todo:ToDo}) => {
     return (
        
         <a 
-            href={`/app/list/${id}`} 
+            href={`/list/${id}`} 
             target='_blank'
             rel="noreferrer"
             className={`${list} ${isDone? done: notDone}`}

@@ -2,50 +2,40 @@
 import { Form } from "../components/Form/Form";
 import { ToDoList } from "../components/ToDoList/ToDoList";
 import { ToDo } from "../models/todo-item";
-import { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
+import { RootState } from "../store";
+import { createAction } from "@reduxjs/toolkit";
+import { deleteAction, updateAction } from "../features/todoList";
+import { useDispatch, useSelector } from "react-redux";
+
 import "react-toastify/dist/ReactToastify.css";
 
+
+
 export const ToDoListPage = () => {
-  const [todos, setTodos] = useState<ToDo[]>([]);
+  const todoList = useSelector((state: RootState) => state.todoList.todos)
+  console.log(todoList)
+  const dispatch = useDispatch()
+
   const notify = (text: string) => toast(text);
+
   const createNewToDo = (text: string) => {
-    const newToDo = {
-      id: todos.length,
-      text: text,
-      isDone: false,
-    };
-    setTodos([...todos, newToDo]);
+    dispatch(createAction(text))
   };
 
   const updateToDo = (ToDoItem: ToDo) => {
-    const newTodos = todos.map((todo) => {
-      if (todo.id === ToDoItem.id) {
-        todo.isDone = !todo.isDone;
-      }
-      return todo;
-    });
-    setTodos(newTodos);
+    dispatch(updateAction(ToDoItem))
   };
 
   const deleteToDo = (ToDoItem: ToDo) => {
-    const newTodos = todos.filter((todo) => todo.id !== ToDoItem.id);
-    setTodos(newTodos);
+    dispatch(deleteAction(ToDoItem))
   };
 
   return (
     <>
-		<ToastContainer/>
-		<Form 
-		createNewToDo={createNewToDo}
-		notify={notify}
-		 />
-		<ToDoList
-			todos={todos}
-			updateToDo={updateToDo}
-			deleteToDo={deleteToDo}
-			notify={notify}
-		/>
+      <ToastContainer />
+      <Form createNewToDo={createNewToDo} notify={notify} />
+      <ToDoList todos={todoList} updateToDo={updateToDo} deleteToDo={deleteToDo} notify={notify} />
     </>
   );
 };
