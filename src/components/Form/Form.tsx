@@ -1,13 +1,16 @@
-// import {useState} from 'react'
-import classes from './Form.module.scss';
+
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from '../../store';
 import { updateAction } from '../../features/textForm';
+import { FormWrapper, FormBlock, FormField, FormControl, FormLabel } from './Form.styled';
+
+import plusIcon from '../../assets/images/plus.png'
+
 
 
 
 export const Form = (props: {createNewToDo: Function, notify: Function}) => {
-  const {form, input, button} = classes
+
 
   // const[text, setText] = useState<string>('')
 
@@ -28,20 +31,19 @@ export const Form = (props: {createNewToDo: Function, notify: Function}) => {
 
 
   return (
-    <div className={form}>
-      <form action="#" onSubmit={formSubmit}>
+    <FormWrapper>
+      <FormBlock action="#" onSubmit={formSubmit}>
 
-        <label>
-          <input 
+        <FormLabel>
+          <FormField 
             value={textForm} 
             type="text" 
-            className={input} 
             onChange={(e) => {
               dispatch(updateAction(e.target.value))}}
           />
-          <button className={button}></button>
-        </label>
-      </form>
-    </div>
+          <FormControl icon={plusIcon}/>
+        </FormLabel>
+      </FormBlock>
+    </FormWrapper>
   );
 };

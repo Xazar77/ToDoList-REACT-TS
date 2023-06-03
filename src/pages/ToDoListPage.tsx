@@ -32,7 +32,7 @@ export const ToDoListPage = () => {
   return (
     <>
       <ToastContainer />
-      <Form createNewToDo={createNewToDo} notify={notify} />
+          <Form createNewToDo={createNewToDo} notify={notify} />
       <ToDoList todos={todoList} updateToDo={updateToDo} deleteToDo={deleteToDo} notify={notify} />
     </>
   );

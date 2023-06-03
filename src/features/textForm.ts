@@ -17,7 +17,6 @@ export const textSlice = createSlice({
     updateAction: (state, action: PayloadAction<string>) => {
 
         state.text = action.payload
-        console.log(action.payload)
     },
   },
 })
