@@ -22,7 +22,11 @@ export const ToDoItem = styled.li`
         margin: 0;
     }
 `
-export const ToDoItemText = styled.span``
+export const ToDoItemText = styled.span`
+    font-size: 25px;
+    font-style: italic;
+    font-weight: bold;
+`
 export const ToDoItemControls = styled.div`
     width: 100px;
     height: 50px;

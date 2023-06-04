@@ -8,7 +8,8 @@ export const ToDoListContainer = styled.div`
 
 `
 export const ToDoListFailed = styled.ul`
-    
+    position: relative;
+    padding: 60px 0 0 0;
     &:empty:after {
         content: 'Нет задач на выполнение';
     }
